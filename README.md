@@ -8,5 +8,6 @@ This project is an effort to innovate and collaborate on development of a softwa
 - Waseem Awan
 
 ### Milestones Achieved
-- Project Proposal Submitted  [05/18/2015]
+- Project Proposal Submitted [05/18/2015] 
+- Personas and User Requirements Identified and Submitted  [05/25/2015]
 (more coming soon)
