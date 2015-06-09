@@ -26,5 +26,13 @@ namespace LoanGrantsSolution.Controllers
 
             return View();
         }
+
+        public ActionResult DownloadFile()
+        {
+            ViewBag.Message = "SBA XML Files .";
+
+            return View();
+        }
+
     }
 }
