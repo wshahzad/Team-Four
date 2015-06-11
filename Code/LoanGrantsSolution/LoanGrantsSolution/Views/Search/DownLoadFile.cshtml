@@ -1,7 +1,60 @@
-﻿
+﻿@using Microsoft.Web;
+@using Microsoft.Web.Helpers;
+@using System.Xml;
+@using System.Web.Http;
+@using System.Xml.Linq;
+@using System.Xml;
+
+@*This file downloads the Federal XML File from the SBA Website and stores it to the Server under the /App_Data/UploadedFiles folder.*@
+
 @{
-    ViewBag.Title = "DownLoadFile";
+    ViewBag.Title = "DownloadFile";
 }
 
-<h2>DownLoadFile</h2>
+@{
+
+    if (IsPost)
+    {
+
+        var strFilePath = "http://api.sba.gov/loans_grants/federal.xml";
+
+        XmlDocument xmldoc = new XmlDocument();
+        xmldoc.Load(strFilePath);
+
+        XmlNodeList xNodelst = xmldoc.DocumentElement.SelectNodes("grant_loan");
+        foreach (XmlNode xNode in xNodelst)
+        {
+
+        }
+
+        xmldoc.Save(Server.MapPath("~/App_Data/UploadedFiles/" + "federal.xml"));
+
+    }
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Download/Save XML Files</title>
+</head>
+<body>
+    <h1>Download XML Data File</h1>
+    <br />
+    <p>
+        Please click on below button to download latest version of Small Business Administration (SBA) Web APi Data.
+    </p>
+    <br />
+    <br />
+    <br />
+    <form action="" method="post">
+        <input type="submit" value="Load Federal XMLDocument" />
+    </form>
+    @if (IsPost)
+    {
+        <span>XML File uploaded successfully!</span>
+        <br />
+    }
+</body>
+</html>
 
