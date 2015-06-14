@@ -17,6 +17,9 @@ namespace LoanGrantsSolution.Controllers
         {
             return View();
         }
-
+        public ActionResult AdvSearch()
+        {
+            return View();
+        }
     }
 }

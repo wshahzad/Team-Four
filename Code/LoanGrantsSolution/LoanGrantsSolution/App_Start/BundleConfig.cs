@@ -27,11 +27,9 @@ namespace LoanGrantsSolution
                     "~/Scripts/angular.min.js"
                     ));
 
-            bundles.Add(new ScriptBundle("~/bundles/angularMVCApp")
-                .IncludeDirectory("~/Scripts/Controllers", "*.js")
-                .Include(
-                    "~/Scripts/app.js"
-                    ));
+//            bundles.Add(new ScriptBundle("~/bundles/angularMVCApp")
+//                        .Include("~/Scripts/app.js")
+//                        .IncludeDirectory("~/Scripts/Controllers", "*.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-theme.css",

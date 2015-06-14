@@ -2,7 +2,7 @@
 
 (function (angular) {
 
-    var SearchController = function ($scope, $http, $interval, $compile) {
+    var SearchController = function ($scope, $http, $interval) {
 
         // On DOM Load this function runs
         function Init() {
@@ -10,13 +10,15 @@
             $('#txtSearchText').focus();
             $scope.data = '';
             $scope.helloAngularJS = 'I work!';
-            $scope.searchResult = [];
+            $scope.searchResult = [''];
+           
         }
 
 
         //This function first try to attempt data from the SBA online API,
         // If site is down or hve issues, it servers the data form the downloaded version (from APIData.js file).
         $scope.search = function () {
+            $scope.data = '';
             $('#search-logo').hide('slow');
             $('#search-bar').removeClass('searchbar-vertical-center');
             if ($scope.searchText == '' || $scope.searchText == undefined) {
@@ -27,16 +29,18 @@
                     // add data the search result
                 }).error(function () {
                     // get data from the json and pass it to the data
-                    $http.get('/scripts/mydata.js').success(function (data) {
+                    $http.get('/scripts/mydata.js').success(function(data) {
 
                         //$scope.searchResult = data;
                         $scope.searchResult = searchInCollectionWithQuery(data, $scope.searchText);
 
-                    }).error(function () {
+                    }).error(function() {
 
                     });
+
+
                 });
-                $('div.alert').hide();
+//                $('div.alert').hide(); // please check its ripple effect . i commented this
             }
         }
 
@@ -182,4 +186,5 @@
 
     // register SearchController with Angular
     angular.module('loanGrantSearchApp').controller('SearchController', SearchController);
+
 })(window.angular);

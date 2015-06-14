@@ -2,8 +2,10 @@
  -  Declared UserProfile service to handle user module.
 */
 
-(function () {
+(function (angular) {
     // myApp object 
-    var app = angular.module('loanGrantSearchApp',[]);
+    angular.module('loanGrantSearchApp',[]);
 
-})();
+
+
+})(window.angular);

@@ -21,7 +21,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Advance Search", "About", "Home")</li>
+                    <li>@Html.ActionLink("Advance Search", "AdvSearch", "Search")</li>
                     @if (Request.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("My Stuff", "Contact", "Home")</li>
@@ -45,7 +45,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/angular")
-    @Scripts.Render("~/bundles/angularMVCApp")
     @RenderSection("scripts", required: false)
 </body>
 </html>

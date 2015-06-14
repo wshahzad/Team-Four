@@ -2,12 +2,57 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron" ng-app="loanGrantSearchApp" ng-controller="SearchController">
-    <input type="text" id="txtSearchText" ng-model="helloAngularJS" />
-    {{helloAngularJS}}
+<div ng-app="loanGrantSearchApp" ng-controller="SearchController">
+    <div id="divNav" ng-cloak></div>
     <div id="search-logo" class="row  col-xs-offset-5 col-sm-offset-5 col-md-offset-5  col-lg-offset-5 logo-position-center">
-        <img src="~/Content/loan_icon.jpg" width="130" height="130" />
+        <img src="/Content/loan_icon.jpg" width="130" height="130" />
     </div>
 
+    <!-- Warning Message -->
+    <div ng-show="emtysearchText || searchResult.length == 0" class="alert alert-dismissible alert-danger" style="margin-top: 20px;">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+    </div>
+
+    <!-- Search Section -->
+    <div id="search-bar" class="row searchbar-vertical-center" style="margin-top: 20px;">
+        <div class="col-xs-9 col-xs-offset-3 col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 col-lg-9 col-lg-offset-3">
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input id="txtSearchText" type="text" class="form-control custom-lg-input " placeholder="enter keywork e.g. Federal" ng-model="searchText">
+                </div>
+                <button type="submit" class="btn btn-warning" ng-click="search()">Submit</button>
+                @*@Html.ActionLink(linkText: "Advance Search", actionName: "AdvanceSearch", htmlAttributes: new {@class="btn btn-success" })*@
+                @Html.ActionLink(linkText: " Advanced Search",
+                 actionName: "index",
+                 routeValues: null,
+                 htmlAttributes: new { @class = "btn btn-success " })
+                @*<a href="AdvSearch.html"><span class="label label-primary">Advance Search</span></a>*@
+            </form>
+            <div id="progress-bar" ng-hide="resultprogress > 99" class="progress progress-striped active searchbar-vertical-center" style="width: 50%; display: none">
+                <div class="progress-bar" ng-style="{ 'width' : resultprogress + '%' }"> Searching {{resultprogress}}% </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <!-- Search Result Renders here -->
+    <div class="container" ng-visible="searchResult.length > 0" ng-show="resultprogress > 99">
+        <div ng-repeat="item in searchResult">
+            <a class="cursor-pointer" ng-click="showInfoInDlg(item)">{{item.title}}</a>
+            <span ng-if="!searchItemExists(item)" class="label label-success cursor-pointer" ng-click="saveToMySearches(item)">Save To Favourites</span>
+            <span ng-if="searchItemExists(item)" ng class="label label-danger cursor-pointer" ng-click="deleteFromMySearches(item)">Remove From Favourites</span>
+            <p class="url-green"> {{item.url}} </p>
+            <p> {{item.description}} </p>
+        </div>
+    </div>
 </div>
 
+@section scripts
+{   
+    <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/Controllers/SearchController.js"></script>
+}
