@@ -7,7 +7,104 @@
     <div id="search-logo" class="row  col-xs-offset-5 col-sm-offset-5 col-md-offset-5  col-lg-offset-5 logo-position-center">
         <img src="/Content/loan_icon.jpg" width="130" height="130" />
     </div>
+      <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Description</label>
+                                <div class="col-lg-10">
+                                    <textarea class="form-control" rows="5" ng-bind="description" disabled=""></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Agency</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" ng-model="agency" disabled="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Url</label>
+                                <div class="col-lg-10 top-margin-6px">
+                                    <a href="{{url}}" target="_blank" class="url-green">{{url}}</a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Options</label>
+                                <div class="col-lg-10">
+                                    <div class="col-lg-5">
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_general_purpose == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_general_purpose"> General Purpose
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_development == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_development"> Development
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_exporting == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_exporting"> Exporting
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_contractor == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_contractor"> Contractor
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_rural == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_rural"> Rural
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_disabled == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_disabled"> Disabled
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_green == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_green"> Green
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_military == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_military"> Military
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_disaster == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_disaster"> Disaster
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_minority == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_minority"> Minority
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Warning Message -->
     <div ng-show="emtysearchText || searchResult.length == 0" class="alert alert-dismissible alert-danger" style="margin-top: 20px;">
         <button type="button" class="close" data-dismiss="alert">×</button>
