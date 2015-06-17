@@ -1,7 +1,7 @@
 ﻿/* Thic controller is for Advance Search Page.*/
 (function () {
     // using http for ajax calls and interval for time interval function
-    var AdvanceSearchController = function ($scope, $http, $interval, userProfile) {
+    var AdvanceSearchController = function ($scope, $http, $interval) {
         $scope.data = '';
         $scope.states = [];
         $scope.federal = [];
@@ -26,7 +26,8 @@
         // Initialize function
         function Init() {
             loadLastSearch(); // call function to load Last search made by user
-            $('#lbl-user-name').text('Welcome ! ' + userProfile.userName()); // Display User Name
+            //$('#lbl-user-name').text('Welcome ! ' + userProfile.userName()); // Display User Name
+            //loadStatesData();
         }
 
         /* Retreive last search made from the localStorage */
@@ -39,6 +40,9 @@
                 var lastSearch = JSON.parse(localStorage.getItem('search_Id_' + searchArray.length));
                 // load it in the model
                 $scope.selectedGovType = lastSearch.GovType;
+                if (lastSearch.GovType == 'State') {
+                    loadStatesData();
+                }
                 $scope.selectedIndustry = lastSearch.Industry;
                 $scope.selectedLoanType = lastSearch.LoanType;
                 $scope.checkboxModel.is_general_purpose = lastSearch.IsGeneralPurpose;

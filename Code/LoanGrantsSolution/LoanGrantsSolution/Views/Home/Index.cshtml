@@ -121,7 +121,8 @@
                 <button type="submit" class="btn btn-warning" ng-click="search()">Submit</button>
                 @*@Html.ActionLink(linkText: "Advance Search", actionName: "AdvanceSearch", htmlAttributes: new {@class="btn btn-success" })*@
                 @Html.ActionLink(linkText: " Advanced Search",
-                 actionName: "index",
+                 actionName: "AdvSearch",
+                 controllerName:"Search",
                  routeValues: null,
                  htmlAttributes: new { @class = "btn btn-success " })
                 @*<a href="AdvSearch.html"><span class="label label-primary">Advance Search</span></a>*@
