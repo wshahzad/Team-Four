@@ -185,10 +185,15 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\LoanGrantsDB.mdf" />
+    <Content Include="App_Data\LoanGrantsDB_log.ldf">
+      <DependentUpon>LoanGrantsDB.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\loan_icon.jpg" />
+    <Content Include="Content\website-under-construction.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -201,6 +206,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
+    <None Include="Properties\PublishProfiles\LoanGrants.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Controllers\advanceSearchController.js" />
     <Content Include="Scripts\Controllers\SearchController.js" />
@@ -257,6 +263,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Search\DownloadFile.cshtml" />
     <Content Include="Views\Search\AdvSearch.cshtml" />
+    <Content Include="Views\Home\MyStuff.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\UploadedFiles\" />

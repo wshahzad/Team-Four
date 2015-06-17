@@ -33,6 +33,9 @@ namespace LoanGrantsSolution.Controllers
 
             return View();
         }
-
+        public ActionResult MyStuff()
+        {
+            return View();
+        }
     }
 }

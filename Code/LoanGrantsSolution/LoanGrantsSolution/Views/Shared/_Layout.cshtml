@@ -24,8 +24,12 @@
                     <li>@Html.ActionLink("Advance Search", "AdvSearch", "Search")</li>
                     @if (Request.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("My Stuff", "Contact", "Home")</li>
-                        <li>@Html.ActionLink("Administration", "DownLoadFile", "Search")</li>
+                        <li>@Html.ActionLink("My Stuff", "MyStuff", "Home")</li>
+                        if (User.Identity.Name == "wshahzad@bu.edu")
+                        {
+                            <li>@Html.ActionLink("Administration", "DownLoadFile", "Search")</li>
+                        }
+
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
