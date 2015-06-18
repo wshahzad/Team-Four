@@ -4,6 +4,7 @@
 @using System.Web.Http;
 @using System.Xml.Linq;
 @using System.Xml;
+@using Newtonsoft.Json;
 
 @*This file downloads the Federal XML File from the SBA Website and stores it to the Server under the /App_Data/UploadedFiles folder.*@
 
@@ -16,18 +17,22 @@
     if (IsPost)
     {
 
+
         var strFilePath = "http://api.sba.gov/loans_grants/federal.xml";
+
 
         XmlDocument xmldoc = new XmlDocument();
         xmldoc.Load(strFilePath);
 
-        XmlNodeList xNodelst = xmldoc.DocumentElement.SelectNodes("grant_loan");
-        foreach (XmlNode xNode in xNodelst)
+        if (xmldoc.FirstChild.LocalName == "xml")
         {
-
+            xmldoc.RemoveChild(xmldoc.FirstChild);
         }
 
-        xmldoc.Save(Server.MapPath("~/App_Data/UploadedFiles/" + "federal.xml"));
+        string jsonText = JsonConvert.SerializeXmlNode(xmldoc, Newtonsoft.Json.Formatting.Indented, true);
+
+        File.WriteAllText(Server.MapPath("~/App_Data/UploadedFiles/LoanGrants.txt"), jsonText);
+
 
     }
 
@@ -57,4 +62,3 @@
     }
 </body>
 </html>
-
