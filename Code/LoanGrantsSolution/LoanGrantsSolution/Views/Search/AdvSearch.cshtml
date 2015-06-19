@@ -99,8 +99,12 @@
     <div id="search-results" class="container" ng-visible="searchResult.length > 0" ng-show="resultprogress > 99">
         <div ng-repeat="item in searchResult">
             <a class="cursor-pointer" ng-click="showInfoInDlg(item)">{{item.title}}</a>
-            <span ng-if="!searchItemExists(item)" class="label label-success cursor-pointer" ng-click="saveToMySearches(item)">Save To Favourites</span>
-            <span ng-if="searchItemExists(item)" ng class="label label-danger cursor-pointer" ng-click="deleteFromMySearches(item)">Remove From Favourites</span>
+            @if (Request.IsAuthenticated)
+            {
+                <span ng-if="!searchItemExists(item)" class="label label-success cursor-pointer" ng-click="saveToMySearches(item)">Save To Favorites</span>
+                <span ng-if="searchItemExists(item)" ng class="label label-danger cursor-pointer" ng-click="deleteFromMySearches(item)">Remove From Favorites</span>
+            }
+
             <p class="url-green"> {{item.url}} </p>
             <p> {{item.description}} </p>
         </div>
