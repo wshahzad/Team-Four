@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div ng-app="loanGrantSearchApp" ng-controller="SearchController">
+    <div id="divNav" ng-cloak></div>
+    <div id="search-logo" class="row  col-xs-offset-5 col-sm-offset-5 col-md-offset-5  col-lg-offset-5 logo-position-center">
+        <img src="/Content/loan_icon.jpg" width="130" height="130" />
+    </div>
+      <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Description</label>
+                                <div class="col-lg-10">
+                                    <textarea class="form-control" rows="5" ng-bind="description" disabled=""></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Agency</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" ng-model="agency" disabled="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Url</label>
+                                <div class="col-lg-10 top-margin-6px">
+                                    <a href="{{url}}" target="_blank" class="url-green">{{url}}</a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Options</label>
+                                <div class="col-lg-10">
+                                    <div class="col-lg-5">
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_general_purpose == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_general_purpose"> General Purpose
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_development == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_development"> Development
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_exporting == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_exporting"> Exporting
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_contractor == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_contractor"> Contractor
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_rural == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_rural"> Rural
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_disabled == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_disabled"> Disabled
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_green == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_green"> Green
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_military == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_military"> Military
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_disaster == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_disaster"> Disaster
+                                            </label>
+                                        </div>
+                                        <div class="checkbox" ng-show="dlgCheckBoxModel.is_minority == '1'">
+                                            <label>
+                                                <input type="checkbox" disabled="" ng-true-value="'1'" ng-false-value="'0'" ng-model="dlgCheckBoxModel.is_minority"> Minority
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Warning Message -->
+    <div ng-show="emtysearchText || searchResult.length == 0" class="alert alert-dismissible alert-danger" style="margin-top: 20px;">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+    </div>
+
+    <!-- Search Section -->
+    <div id="search-bar" class="row searchbar-vertical-center" style="margin-top: 20px;">
+        <div class="col-xs-9 col-xs-offset-3 col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 col-lg-9 col-lg-offset-3">
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input id="txtSearchText" type="text" class="form-control custom-lg-input " placeholder="enter keyword e.g. Federal" ng-model="searchText">
+                </div>
+                <button type="submit" class="btn btn-warning" ng-click="search()">Search</button>
+                @*@Html.ActionLink(linkText: "Advance Search", actionName: "AdvanceSearch", htmlAttributes: new {@class="btn btn-success" })*@
+                @Html.ActionLink(linkText: " Advanced Search",
+                 actionName: "AdvSearch",
+                 controllerName:"Search",
+                 routeValues: null,
+                 htmlAttributes: new { @class = "btn btn-success " })
+                @*<a href="AdvSearch.html"><span class="label label-primary">Advance Search</span></a>*@
+            </form>
+            <div id="progress-bar" ng-hide="resultprogress > 99" class="progress progress-striped active searchbar-vertical-center" style="width: 50%; display: none">
+                <div class="progress-bar" ng-style="{ 'width' : resultprogress + '%' }"> Searching {{resultprogress}}% </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <!-- Search Result Renders here -->
+    <div class="container" ng-visible="searchResult.length > 0" ng-show="resultprogress > 99">
+        <div ng-repeat="item in searchResult">
+            <a class="cursor-pointer" ng-click="showInfoInDlg(item)">{{item.title}}</a>
+            @if (Request.IsAuthenticated)
+            {
+                <span ng-if="!searchItemExists(item)" class="label label-success cursor-pointer" ng-click="saveToMySearches(item)">Save To Favorites</span>
+                <span ng-if="searchItemExists(item)" ng class="label label-danger cursor-pointer" ng-click="deleteFromMySearches(item)">Remove From Favorites</span>
+            }
+
+            <p class="url-green"> {{item.url}} </p>
+            <p> {{item.description}} </p>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{   
+    <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/Controllers/SearchController.js"></script>
+}

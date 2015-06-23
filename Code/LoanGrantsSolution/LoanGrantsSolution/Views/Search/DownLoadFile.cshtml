@@ -1,0 +1,66 @@
+﻿@using Microsoft.Web;
+@using Microsoft.Web.Helpers;
+@using System.Xml;
+@using System.Web.Http;
+@using System.Xml.Linq;
+@using System.Xml;
+@using Newtonsoft.Json;
+
+@*This file downloads the Federal XML File from the SBA Website and stores it to the Server under the /App_Data/UploadedFiles folder.*@
+
+@{
+    ViewBag.Title = "SBA Data Grab Utility";
+}
+
+@{
+
+    if (IsPost)
+    {
+
+
+        var strFilePath = "http://api.sba.gov/loans_grants/federal.xml";
+
+
+        XmlDocument xmldoc = new XmlDocument();
+        xmldoc.Load(strFilePath);
+
+        if (xmldoc.FirstChild.LocalName == "xml")
+        {
+            xmldoc.RemoveChild(xmldoc.FirstChild);
+        }
+
+        string jsonText = JsonConvert.SerializeXmlNode(xmldoc, Newtonsoft.Json.Formatting.Indented, true);
+
+        File.WriteAllText(Server.MapPath("~/App_Data/UploadedFiles/LoanGrants.txt"), jsonText);
+
+
+    }
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Download/Save Data File(s)</title>
+</head>
+<body>
+    <h1>Download SBA Data File</h1>
+    <br />
+    <p> The search is performed live from Small Business Administration (SBA) Web APi Data.<br />
+        In case of service intruption form SBA Web Site, and avoid intruption on our web site we cached a local copy of serach data.<br />
+        <br />
+        Please click on below button to download the latest version of Small Business Administration (SBA) Web APi Data.
+    </p>
+    <br />
+    <br />
+    <br />
+    <form action="" method="post">
+        <input type="submit" value="Download Now" />
+    </form>
+    @if (IsPost)
+    {
+        <span>Data File Downloaded Successfully!</span>
+        <br />
+    }
+</body>
+</html>
